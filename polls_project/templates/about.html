@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>About Us</h1>
+  <p>Using this application, you can create your own polls and reach to other users for their opinions.</p>
+  <p>You can also vote for other polls.</p>
+  <p>Please <a href="{% url 'login' %}">Login</a> to use the app.</p>
+  <p>Or <a href="{% url 'accounts:signup' %}">Sign Up</a> if you are a new user.</p>
+{% endblock %}

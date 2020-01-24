@@ -1,0 +1,14 @@
+.rcorners2 {
+  background-color: #F8F9FA;
+  border-radius: 25px;
+  border: 2px solid #404040;
+  padding: 50px;
+  width: 50%;
+  height: 50%;
+  align: center;
+  margin: auto;
+}
+
+body{
+  background-color: #C0C0C0;
+}

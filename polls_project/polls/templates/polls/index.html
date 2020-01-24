@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% if latest_question_list %}
+  {% for question in latest_question_list %}
+  <br>
+  <div class="rcorners2 shadow">
+      <h2>{{question.question_text}}?</h2>
+      <small class="form-text text-muted">Published on:
+        <i class="fas fa-clock"></i>
+        <time>{{question.pub_date}}</time>
+      </small>
+      <br>
+      <p>Total Votes: {{question.get_total_votes}} </p>
+      {% if user.is_authenticated %}
+      {% if question in user.questions_voted.all %}
+      <button type="button" class="btn btn-secondary" disabled>
+        <i class="far fa-check-circle"></i>
+        Voted
+      </button>
+      {% else %}
+      <a type="button" href="{% url 'polls:detail' question.id %}" class="btn btn-success">
+        Vote!
+      </a>
+      {% endif %}
+      {% if question.user == user %}
+      <a type="button" href="{% url 'polls:delete' question.id %}" class="btn btn-danger">
+        <i class="fas fa-trash-alt"></i>
+        Delete
+      </a>
+      {% endif %}
+      {% endif %}
+      <a type="button" href="{% url 'polls:results' question.id %}" class="btn btn-primary">
+        View Results
+      </a>
+      <hr>
+      Leader:
+      <div class="progress" style="height: 50px;">
+          <div class="progress-bar progress-bar bg-danger" role="progressbar" style="width:{{question.get_leader.1}}%">
+            {{question.get_leader.0}}: {{question.get_leader.1}}%
+          </div>
+      </div>
+  </div>
+  <br>
+{% endfor %}
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% endblock %}

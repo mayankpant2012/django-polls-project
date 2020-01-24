@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ question.question_text }}?</h1>
+<small class="form-text text-muted">Published on:
+  <i class="fas fa-clock"></i>
+  <time>{{question.pub_date}}</time>
+</small>
+<br>
+<ul class="list-group">
+{% for choice in question.choice_set.all %}
+    <li class="list-group-item justify-content-between align-items-center d-flex">{{ choice.choice_text }}
+      <span class="badge badge-primary badge-pill">{{ choice.votes }} vote{{ choice.votes|pluralize }}</span>
+    </li>
+{% endfor %}
+</ul>
+<br>
+
+<div class="media-footer">
+  {% if user.is_authenticated and question.user == user and not hide_delete %}
+    <a href="{% url 'polls:delete' pk=question.pk %}" title="delete" class="btn btn-danger">
+      <i class="fas fa-trash-alt"></i>Delete
+    </a>
+  {% endif %}
+</div>
+{% endblock %}

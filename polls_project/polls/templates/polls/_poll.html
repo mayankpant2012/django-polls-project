@@ -1,0 +1,20 @@
+<h1>{{ question.question_text }}</h1>
+Published on: <time>{{question.pub_date}}</time>
+<ul class="list-group">
+{% for choice in question.choice_set.all %}
+    <li class="list-group-item justify-content-between align-items-center d-flex">{{ choice.choice_text }}
+      <span class="badge badge-primary badge-pill">{{ choice.votes }} vote{{ choice.votes|pluralize }}</span>
+    </li>
+{% endfor %}
+</ul>
+<br>
+
+<div class="media-footer">
+  {% if user.is_authenticated and question.user == user and not hide_delete %}
+    <a href="{% url 'polls:delete' pk=question.pk %}" title="delete" class="btn btn-simple">
+      <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+      <span class="text-danger icon-label">Delete</span>
+    </a>
+  {% endif %}
+</div>
+{#<a class="btn btn-success" href="{% url 'polls:detail' question.id %}">Vote again?</a>#}
