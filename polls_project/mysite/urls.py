@@ -20,7 +20,6 @@ from polls import views as polls_views
 
 urlpatterns = [
     path('', auth_views.LoginView.as_view(template_name="accounts/login.html"),name='login'),
-    path('polls-administrator/', admin.site.urls),
     path('polls/',include('polls.urls')),
     path('accounts/',include('accounts.urls')),
     path('about/',polls_views.AboutView.as_view(),name='about'),
